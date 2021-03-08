@@ -1,0 +1,30 @@
+{
+    "name": "dawnstar/api",
+    "description": "Api for Dawnstar CMS",
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "require": {
+        "dawnstar/dawnstar": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Dawnstar\\Api\\": "src"
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "classmap-authoritative": true,
+        "apcu-autoloader": true,
+        "optimize-autoloader": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Dawnstar\\Api\\ApiServiceProvider"
+            ]
+        }
+    }
+}
+
+
