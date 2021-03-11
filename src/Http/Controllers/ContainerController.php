@@ -2,16 +2,37 @@
 
 namespace Dawnstar\Api\Http\Controllers;
 
-use Dawnstar\Api\Repositories\ContainerRepository;
+use Dawnstar\Api\Contracts\Resources\Output\JsonOutput;
+use Dawnstar\Api\Contracts\Repositories\ContainerRepository;
+use Dawnstar\Api\Contracts\Resources\ContainerResource;
+use Dawnstar\Models\Language;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
 class ContainerController extends Controller
 {
 
-    public function __construct(ContainerRepository $containerRepository)
+    /**
+     * @var ContainerRepository
+     */
+    private $containerRepository;
+    /**
+     * @var ContainerResource
+     */
+    private $containerResource;
+    /**
+     * @var JsonOutput
+     */
+    private $jsonOutput;
+
+    public function __construct(ContainerRepository $containerRepository, ContainerResource $containerResource, JsonOutput $jsonOutput)
     {
         $this->containerRepository = $containerRepository;
+        $this->containerResource = $containerResource;
+        $this->jsonOutput = $jsonOutput;
+
+
+        dawnstar()->language = Language::where('code', request('language') ?: 'tr')->first();
     }
 
     /**
@@ -22,6 +43,10 @@ class ContainerController extends Controller
     public function index()
     {
         $containers = $this->containerRepository->getAll();
+
+        $data = $this->containerResource->collectionToArray($containers);
+
+        return $this->jsonOutput->output($data);
     }
 
     /**
@@ -41,9 +66,10 @@ class ContainerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(int $id)
     {
-        //
+        $container = $this->containerRepository->getById($id);
+        dd($container);
     }
 
     /**
@@ -55,7 +81,8 @@ class ContainerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $container = $this->containerRepository->getById($id);
+        dd($container);
     }
 
     /**
