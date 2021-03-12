@@ -7,9 +7,8 @@ use Dawnstar\Api\Contracts\Repositories\ContainerRepository;
 use Dawnstar\Api\Contracts\Resources\ContainerResource;
 use Dawnstar\Models\Language;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 
-class ContainerController extends Controller
+class ContainerController extends BaseController
 {
 
     /**
@@ -27,12 +26,10 @@ class ContainerController extends Controller
 
     public function __construct(ContainerRepository $containerRepository, ContainerResource $containerResource, JsonOutput $jsonOutput)
     {
+        parent::__construct();
         $this->containerRepository = $containerRepository;
         $this->containerResource = $containerResource;
         $this->jsonOutput = $jsonOutput;
-
-
-        dawnstar()->language = Language::where('code', request('language') ?: 'tr')->first();
     }
 
     /**
