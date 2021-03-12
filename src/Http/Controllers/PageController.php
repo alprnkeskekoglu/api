@@ -2,11 +2,35 @@
 
 namespace Dawnstar\Api\Http\Controllers;
 
+use Dawnstar\Api\Contracts\Repositories\PageRepository;
+use Dawnstar\Api\Contracts\Resources\Output\JsonOutput;
+use Dawnstar\Api\Contracts\Resources\PageResource;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
-class PageController extends Controller
+class PageController extends BaseController
 {
+    /**
+     * @var PageRepository
+     */
+    private PageRepository $pageRepository;
+    /**
+     * @var PageResource
+     */
+    private PageResource $pageResource;
+    /**
+     * @var JsonOutput
+     */
+    private JsonOutput $jsonOutput;
+
+    public function __construct(PageRepository $pageRepository, PageResource $pageResource, JsonOutput $jsonOutput)
+    {
+        parent::__construct();
+        $this->pageRepository = $pageRepository;
+        $this->pageResource = $pageResource;
+        $this->jsonOutput = $jsonOutput;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +38,9 @@ class PageController extends Controller
      */
     public function index()
     {
-        //
+        $pages = $this->pageRepository->getAll();
+        $data = $this->pageResource->collectionToArray($pages);
+        return $this->jsonOutput->output($data);
     }
 
     /**
@@ -36,7 +62,9 @@ class PageController extends Controller
      */
     public function show($id)
     {
-        //
+        $page = $this->pageRepository->getById($id);
+        $data = $this->pageResource->singleToArray($page);
+        return $this->jsonOutput->output($data);
     }
 
     /**
