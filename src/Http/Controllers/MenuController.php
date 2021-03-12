@@ -2,33 +2,32 @@
 
 namespace Dawnstar\Api\Http\Controllers;
 
+use Dawnstar\Api\Contracts\Repositories\MenuRepository;
 use Dawnstar\Api\Contracts\Resources\Output\JsonOutput;
-use Dawnstar\Api\Contracts\Repositories\ContainerRepository;
-use Dawnstar\Api\Contracts\Resources\ContainerResource;
-use Dawnstar\Models\Language;
+use Dawnstar\Api\Contracts\Resources\MenuResource;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
-class ContainerController extends BaseController
+class MenuController extends BaseController
 {
-
     /**
-     * @var ContainerRepository
+     * @var MenuRepository
      */
-    private $containerRepository;
+    private MenuRepository $menuRepository;
     /**
-     * @var ContainerResource
+     * @var MenuResource
      */
-    private $containerResource;
+    private MenuResource $menuResource;
     /**
      * @var JsonOutput
      */
-    private $jsonOutput;
+    private JsonOutput $jsonOutput;
 
-    public function __construct(ContainerRepository $containerRepository, ContainerResource $containerResource, JsonOutput $jsonOutput)
+    public function __construct(MenuRepository $menuRepository, MenuResource $menuResource, JsonOutput $jsonOutput)
     {
         parent::__construct();
-        $this->containerRepository = $containerRepository;
-        $this->containerResource = $containerResource;
+        $this->menuRepository = $menuRepository;
+        $this->menuResource = $menuResource;
         $this->jsonOutput = $jsonOutput;
     }
 
@@ -39,8 +38,8 @@ class ContainerController extends BaseController
      */
     public function index()
     {
-        $containers = $this->containerRepository->getAll();
-        $data = $this->containerResource->collectionToArray($containers);
+        $menus = $this->menuRepository->getAll();
+        $data = $this->menuResource->collectionToArray($menus);
         return $this->jsonOutput->output($data);
     }
 
@@ -61,10 +60,10 @@ class ContainerController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(int $id)
+    public function show($id)
     {
-        $container = $this->containerRepository->getById($id);
-        $data = $this->containerResource->singleToArray($container);
+        $menu = $this->menuRepository->getById($id);
+        $data = $this->menuResource->singleToArray($menu);
         return $this->jsonOutput->output($data);
     }
 
@@ -88,6 +87,6 @@ class ContainerController extends BaseController
      */
     public function destroy($id)
     {
-        $container = $this->containerRepository->getById($id);
+        //
     }
 }

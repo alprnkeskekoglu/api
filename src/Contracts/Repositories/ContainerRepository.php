@@ -20,12 +20,12 @@ class ContainerRepository implements ContainerInterface, BaseInterface
 
     public function getCategories($container)
     {
-        // TODO: Implement getCategories() method.
+        return $container->categories()->where('status', 1)->orderBy('lft')->get();
     }
 
     public function getPages($container)
     {
-        // TODO: Implement getPages() method.
+        return $container->pages()->where('status', 1)->orderBy('order')->get();
     }
 
     public function store($request)

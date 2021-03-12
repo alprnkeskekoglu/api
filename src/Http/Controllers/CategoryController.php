@@ -3,32 +3,32 @@
 namespace Dawnstar\Api\Http\Controllers;
 
 use Dawnstar\Api\Contracts\Resources\Output\JsonOutput;
-use Dawnstar\Api\Contracts\Repositories\ContainerRepository;
-use Dawnstar\Api\Contracts\Resources\ContainerResource;
+use Dawnstar\Api\Contracts\Repositories\CategoryRepository;
+use Dawnstar\Api\Contracts\Resources\CategoryResource;
 use Dawnstar\Models\Language;
 use Illuminate\Http\Request;
 
-class ContainerController extends BaseController
+class CategoryController extends BaseController
 {
 
     /**
-     * @var ContainerRepository
+     * @var CategoryRepository
      */
-    private $containerRepository;
+    private $categoryRepository;
     /**
-     * @var ContainerResource
+     * @var CategoryResource
      */
-    private $containerResource;
+    private $categoryResource;
     /**
      * @var JsonOutput
      */
     private $jsonOutput;
 
-    public function __construct(ContainerRepository $containerRepository, ContainerResource $containerResource, JsonOutput $jsonOutput)
+    public function __construct(CategoryRepository $categoryRepository, CategoryResource $categoryResource, JsonOutput $jsonOutput)
     {
         parent::__construct();
-        $this->containerRepository = $containerRepository;
-        $this->containerResource = $containerResource;
+        $this->categoryRepository = $categoryRepository;
+        $this->categoryResource = $categoryResource;
         $this->jsonOutput = $jsonOutput;
     }
 
@@ -39,8 +39,8 @@ class ContainerController extends BaseController
      */
     public function index()
     {
-        $containers = $this->containerRepository->getAll();
-        $data = $this->containerResource->collectionToArray($containers);
+        $containers = $this->categoryRepository->getAll();
+        $data = $this->categoryResource->collectionToArray($containers);
         return $this->jsonOutput->output($data);
     }
 
@@ -63,8 +63,8 @@ class ContainerController extends BaseController
      */
     public function show(int $id)
     {
-        $container = $this->containerRepository->getById($id);
-        $data = $this->containerResource->singleToArray($container);
+        $container = $this->categoryRepository->getById($id);
+        $data = $this->categoryResource->singleToArray($container);
         return $this->jsonOutput->output($data);
     }
 

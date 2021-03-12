@@ -2,17 +2,29 @@
 
 namespace Dawnstar\Api\Contracts\Resources;
 
-class MediaResource
+class MediaResource extends ResponseResource
 {
-    public function getMediasByRelation($model)
+    public function collectionToArray($medias): array
     {
         $array = [];
 
-        $medias = $model->mc_;
         foreach ($medias as $media) {
-            $array[] = media($media->id);
+            $array[$media->pivot->media_key] = $this->singleToArray($media);
         }
 
         return $array;
+    }
+
+    public function singleToArray($media): array
+    {
+        $media = media($media->id);
+        return [
+            'id' => $media->id,
+            'fullname' => $media->fullname,
+            'extension' => $media->extension,
+            'filename' => $media->filename,
+            'url' => $media->url,
+            'size' => $media->size
+        ];
     }
 }
