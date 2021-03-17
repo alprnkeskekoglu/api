@@ -5,8 +5,10 @@ namespace Dawnstar\Api\Contracts\Repositories;
 use Dawnstar\Api\Contracts\Interfaces\BaseInterface;
 use Dawnstar\Api\Contracts\Interfaces\CategoryInterface;
 use Dawnstar\Models\Category;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Schema;
 
-class CategoryRepository implements CategoryInterface, BaseInterface
+class CategoryRepository extends BaseRepository implements BaseInterface, CategoryInterface
 {
     public function getAll()
     {
@@ -31,20 +33,5 @@ class CategoryRepository implements CategoryInterface, BaseInterface
     public function getPages($category)
     {
         return $category->pages()->where('status', 1)->orderBy('order')->get();
-    }
-
-    public function store($request)
-    {
-        // TODO: Implement store() method.
-    }
-
-    public function update($model)
-    {
-        // TODO: Implement update() method.
-    }
-
-    public function destroy($model)
-    {
-        // TODO: Implement destroy() method.
     }
 }

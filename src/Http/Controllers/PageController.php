@@ -76,7 +76,10 @@ class PageController extends BaseController
      */
     public function update(Request $request, $id)
     {
-        //
+        $page = $this->pageRepository->getById($id);
+        $updatedPage = $this->pageRepository->update($request, $page);
+        $data = $this->pageResource->singleToArray($updatedPage);
+        return $this->jsonOutput->output($data);
     }
 
     /**
@@ -87,6 +90,9 @@ class PageController extends BaseController
      */
     public function destroy($id)
     {
-        //
+        $page = $this->pageRepository->getById($id);
+        $this->pageRepository->destroy($page);
+
+        return $this->jsonOutput->output(['message' => $id . ' id\'li sayfa başarıyla silindi!']);
     }
 }

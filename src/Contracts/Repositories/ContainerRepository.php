@@ -5,8 +5,10 @@ namespace Dawnstar\Api\Contracts\Repositories;
 use Dawnstar\Api\Contracts\Interfaces\BaseInterface;
 use Dawnstar\Api\Contracts\Interfaces\ContainerInterface;
 use Dawnstar\Models\Container;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Schema;
 
-class ContainerRepository implements ContainerInterface, BaseInterface
+class ContainerRepository extends BaseRepository implements ContainerInterface, BaseInterface
 {
     public function getAll()
     {
@@ -26,20 +28,5 @@ class ContainerRepository implements ContainerInterface, BaseInterface
     public function getPages($container)
     {
         return $container->pages()->where('status', 1)->orderBy('order')->get();
-    }
-
-    public function store($request)
-    {
-        // TODO: Implement store() method.
-    }
-
-    public function update($model)
-    {
-        // TODO: Implement update() method.
-    }
-
-    public function destroy($model)
-    {
-        // TODO: Implement destroy() method.
     }
 }

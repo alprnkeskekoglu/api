@@ -77,7 +77,10 @@ class ContainerController extends BaseController
      */
     public function update(Request $request, $id)
     {
-        //
+        $container = $this->containerRepository->getById($id);
+        $updatedContainer = $this->containerRepository->update($request, $container);
+        $data = $this->containerResource->singleToArray($updatedContainer);
+        return $this->jsonOutput->output($data);
     }
 
     /**
@@ -89,5 +92,8 @@ class ContainerController extends BaseController
     public function destroy($id)
     {
         $container = $this->containerRepository->getById($id);
+        $this->containerRepository->destroy($container);
+
+        return $this->jsonOutput->output(['message' => $id . ' id\'li sayfa yapısı başarıyla silindi!']);
     }
 }

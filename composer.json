@@ -5,7 +5,8 @@
     "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
-        "dawnstar/dawnstar": "*"
+        "dawnstar/dawnstar": "*",
+        "laravel/sanctum": "^2"
     },
     "autoload": {
         "psr-4": {

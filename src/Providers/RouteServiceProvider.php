@@ -15,7 +15,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string|null
      */
-    protected $namespace = 'Dawnstar\\Api\\Http\\Controllers';
+    protected $namespace = '\\Dawnstar\\Api\\Http\\Controllers';
 
     /**
      * Define your route model bindings, pattern filters, etc.

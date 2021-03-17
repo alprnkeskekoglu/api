@@ -7,8 +7,10 @@ use Dawnstar\Api\Contracts\Interfaces\CategoryInterface;
 use Dawnstar\Api\Contracts\Interfaces\PageInterface;
 use Dawnstar\Models\Category;
 use Dawnstar\Models\Page;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Schema;
 
-class PageRepository implements PageInterface, BaseInterface
+class PageRepository extends BaseRepository implements PageInterface, BaseInterface
 {
     public function getAll()
     {
@@ -33,20 +35,5 @@ class PageRepository implements PageInterface, BaseInterface
     public function getCategories($page)
     {
         return $page->categories()->where('status', 1)->orderBy('lft')->get();
-    }
-
-    public function store($request)
-    {
-        // TODO: Implement store() method.
-    }
-
-    public function update($model)
-    {
-        // TODO: Implement update() method.
-    }
-
-    public function destroy($model)
-    {
-        // TODO: Implement destroy() method.
     }
 }

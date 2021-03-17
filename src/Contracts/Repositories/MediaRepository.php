@@ -5,6 +5,7 @@ namespace Dawnstar\Api\Contracts\Repositories;
 use Dawnstar\Api\Contracts\Interfaces\BaseInterface;
 use Dawnstar\Api\Contracts\Interfaces\MediaInterface;
 use Dawnstar\FileManager\Models\Media;
+use Illuminate\Http\Request;
 
 class MediaRepository implements MediaInterface, BaseInterface
 {
@@ -28,7 +29,7 @@ class MediaRepository implements MediaInterface, BaseInterface
         // TODO: Implement store() method.
     }
 
-    public function update($model)
+    public function update(Request $request, $model)
     {
         // TODO: Implement update() method.
     }

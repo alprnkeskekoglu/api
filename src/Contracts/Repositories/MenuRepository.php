@@ -9,6 +9,7 @@ use Dawnstar\Api\Contracts\Interfaces\PageInterface;
 use Dawnstar\Models\Category;
 use Dawnstar\Models\Menu;
 use Dawnstar\Models\Page;
+use Illuminate\Http\Request;
 
 class MenuRepository implements MenuInterface, BaseInterface
 {
@@ -39,7 +40,7 @@ class MenuRepository implements MenuInterface, BaseInterface
         // TODO: Implement store() method.
     }
 
-    public function update($model)
+    public function update(Request $request, $model)
     {
         // TODO: Implement update() method.
     }

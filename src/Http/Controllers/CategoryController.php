@@ -77,7 +77,10 @@ class CategoryController extends BaseController
      */
     public function update(Request $request, $id)
     {
-        //
+        $container = $this->categoryRepository->getById($id);
+        $updatedContainer = $this->categoryRepository->update($request, $container);
+        $data = $this->categoryResource->singleToArray($updatedContainer);
+        return $this->jsonOutput->output($data);
     }
 
     /**
@@ -88,6 +91,9 @@ class CategoryController extends BaseController
      */
     public function destroy($id)
     {
-        $container = $this->containerRepository->getById($id);
+        $category = $this->categoryRepository->getById($id);
+        $this->categoryRepository->destroy($category);
+
+        return $this->jsonOutput->output(['message' => $id . ' id\'li kategori başarıyla silindi!']);
     }
 }
