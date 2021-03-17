@@ -92,5 +92,8 @@ class ContainerController extends BaseController
     public function destroy($id)
     {
         $container = $this->containerRepository->getById($id);
+        $this->containerRepository->destroy($container);
+
+        return $this->jsonOutput->output(['message' => $id . ' id\'li sayfa yapısı başarıyla silindi!']);
     }
 }
