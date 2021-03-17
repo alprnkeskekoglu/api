@@ -77,7 +77,10 @@ class CategoryController extends BaseController
      */
     public function update(Request $request, $id)
     {
-        //
+        $container = $this->containerRepository->getById($id);
+        $updatedContainer = $this->containerRepository->update($request, $container);
+        $data = $this->containerResource->singleToArray($updatedContainer);
+        return $this->jsonOutput->output($data);
     }
 
     /**

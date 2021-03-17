@@ -2,6 +2,8 @@
 
 namespace Dawnstar\Api\Contracts\Interfaces;
 
+use Illuminate\Http\Request;
+
 interface BaseInterface
 {
     public function getAll();
@@ -10,7 +12,7 @@ interface BaseInterface
 
     public function store($request);
 
-    public function update($model);
+    public function update(Request $request, $model);
 
     public function destroy($model);
 }
