@@ -8,6 +8,7 @@ use Dawnstar\Api\Providers\ConfigServiceProvider;
 use Dawnstar\Api\Providers\RouteServiceProvider;
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Sanctum\HasApiTokens;
 
 class ApiServiceProvider extends ServiceProvider
 {
@@ -17,7 +18,11 @@ class ApiServiceProvider extends ServiceProvider
         config([
             'auth.guards.apiAdmin' => [
                 'driver' => 'sanctum',
-                'provider' => 'admins',
+                'provider' => 'apiAdmins',
+            ],
+            'auth.providers.apiAdmins' => [
+                'driver' => 'eloquent',
+                'model' => \Dawnstar\Api\Models\Admin::class,
             ]
         ]);
     }

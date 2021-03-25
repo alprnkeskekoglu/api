@@ -2,7 +2,7 @@
 
 namespace Dawnstar\Api\Http\Controllers;
 
-use Dawnstar\Models\Admin;
+use Dawnstar\Api\Models\Admin;
 use Dotenv\Exception\ValidationException;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
